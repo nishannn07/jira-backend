@@ -43,7 +43,7 @@ register_blueprints(app)
 
 @app.route('/')
 def home():
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main_bp.dashboard'))
 
 if __name__ == '__main__':
     app.run(debug=True)
