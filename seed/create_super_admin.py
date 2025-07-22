@@ -1,8 +1,9 @@
 import os
-from controllers.user_controller import create_super_admin
 import click
 from flask.cli import with_appcontext
+from controllers.user_controller import create_super_admin
 
+@click.command('create-super-admin')
 @with_appcontext
 def create_super_admin_command():
     try:
