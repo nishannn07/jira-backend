@@ -1,4 +1,3 @@
-
 from models.project import Project
 from models.user import User
 from models.task import Task
@@ -62,12 +61,13 @@ def get_user_projects(user_id):
     #     v_projects.add(project)
     for team in user.teams:
         for project in team.projects:
-            v_projects.add(project)
+            if not project.is_deleted:
+                v_projects.add(project)
     return sorted(list(v_projects), key=lambda p: p.id)
 
 
 def get_project_with_stats(project_id):
-    project = Project.query.get_or_404(project_id)
+    project = Project.query.filter_by(id=project_id, is_deleted=False).first_or_404()
     task_stats = db.session.query(
         Task.status,
         func.count(Task.id).label('count')

@@ -74,6 +74,7 @@ def edit_project(project_id):
 
 @projects_bp.route('/<int:project_id>/delete', methods=['DELETE'])
 @jwt_required()
+@role_required('manager', 'super_admin')
 def delete_project_route(project_id):
     delete_project(project_id)
     return jsonify({'message': 'Project deleted successfully.'}), 200
